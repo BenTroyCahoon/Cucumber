@@ -1,3 +1,5 @@
+
+
 <template>
   <AppLayout title="Sök matvara">
     <div class="max-w-4xl mx-auto p-4 sm:p-6">
@@ -15,7 +17,7 @@
           Endast ekologiskt
         </label>
       </div>
-
+<!-- 
       <div v-if="results.length" class="space-y-4">
         <div
           v-for="result in results"
@@ -37,6 +39,13 @@
             Visa på karta
           </a>
         </div>
+      </div> -->
+      <div v-if="results.length" class="space-y-4">
+        <ResultCard
+          v-for="result in results"
+          :key="result.product + result.store"
+          :result="result"
+        />
       </div>
 
       <div v-else-if="form.q" class="text-gray-500 mt-4">Inga resultat hittades.</div>
@@ -45,11 +54,12 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+
+import { ref, watch, onMounted } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 import AppLayout from '@/Layouts/AppLayout.vue'
-import { defineProps } from 'vue'
 import debounce from 'lodash/debounce'
+import ResultCard from '@/Components/ResultCard.vue'
 
 const props = defineProps({
   results: Array,
@@ -60,13 +70,30 @@ const props = defineProps({
 const form = useForm({
   q: props.query || '',
   organic: props.organic || false,
+  latitude: null,
+  longitude: null,
 })
+
 
 const search = debounce(() => {
   form.get(route('search.index'), { preserveState: true, replace: true })
 }, 500)
 
 watch(() => [form.q, form.organic], search)
+
+// 🔍 Get user location on page load
+onMounted(() => {
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      form.latitude = pos.coords.latitude
+      form.longitude = pos.coords.longitude
+      search() // search with location
+    },
+    (err) => {
+      console.warn('Location access denied or failed.', err)
+    }
+  )
+})
 </script>
 
 
