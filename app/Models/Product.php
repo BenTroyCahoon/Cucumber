@@ -13,5 +13,11 @@ class Product extends Model
     {
         return $this->hasMany(Price::class);
     }
+
+    public function savedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'saved_products')->withTimestamps();
+    }
+
 }
 
