@@ -10,25 +10,23 @@ class SavedProductController extends Controller
 {
     public function store(Request $request)
     {
-        $productId = $request->input('product_id');
+        $request->validate([
+            'product_id' => ['required', 'exists:products,id'],
+        ]);
+
         $user = Auth::user();
+        $user->savedProducts()->syncWithoutDetaching([$request->input('product_id')]);
 
-        if ($productId && $user) {
-            $user->savedProducts()->syncWithoutDetaching([$productId]);
-        }
-
-        return back(); //return response()->json(['status' => 'saved']);
+        return response()->json(['status' => 'saved']);
     }
 
     public function destroy(Product $product)
     {
         $user = Auth::user();
+        $user->savedProducts()->detach($product->id);
 
-        if ($user) {
-            $user->savedProducts()->detach($product->id);
-        }
-
-        return back(); //return response()->json(['status' => 'removed']); for the real deal?
+        return response()->json(['status' => 'removed']);
     }
 }
+
 
