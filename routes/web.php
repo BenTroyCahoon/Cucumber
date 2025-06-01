@@ -23,6 +23,11 @@ Route::middleware([
     })->name('dashboard');
 });
 
+Route::get('/', function () {
+    return Inertia::render('Welcome');
+});
+
+
 use App\Http\Controllers\SearchController;
 //for search only.
 Route::get('/search', [SearchController::class, 'index'])->name('search.index');
