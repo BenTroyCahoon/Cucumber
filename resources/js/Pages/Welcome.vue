@@ -185,19 +185,26 @@ function handleImageError() {
     </p>
 
     <div class="space-x-4 mb-10">
-      <Link
+    <Link
         :href="route('register')"
         class="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-4 rounded shadow"
-      >
+    >
         Registrera dig
-      </Link>
+    </Link>
 
-      <Link
+    <Link
+        :href="route('login')"
+        class="bg-white border border-pink-600 text-pink-700 font-semibold py-2 px-4 rounded hover:bg-pink-50"
+    >
+        Logga in
+    </Link>
+
+    <Link
         :href="route('search.index')"
         class="border border-pink-600 text-pink-700 font-semibold py-2 px-4 rounded hover:bg-pink-50"
-      >
+    >
         Sök utan konto
-      </Link>
+    </Link>
     </div>
 
     <ul class="text-left text-gray-800 space-y-2 text-base max-w-md">
