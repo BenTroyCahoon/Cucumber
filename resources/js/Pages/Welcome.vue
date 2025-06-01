@@ -178,7 +178,7 @@ function handleImageError() {
   <Head title="Välkommen" />
   <div class="bg-gradient-to-br from-pink-100 via-white to-pink-200 min-h-screen flex flex-col justify-center items-center text-center px-4">
     <h1 class="text-4xl sm:text-5xl font-extrabold text-pink-700 mb-4">
-      Välkommen till Matpriskollen!
+     Från gurkkris till kontroll – få koll på matpriserna med Matpriskollen!
     </h1>
     <p class="text-lg text-gray-700 max-w-2xl mb-6">
       Jämför matpriser, hitta närmaste butik, spara produkter och få en smartare vardag.

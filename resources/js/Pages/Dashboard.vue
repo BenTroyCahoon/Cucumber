@@ -27,7 +27,6 @@ import Welcome from '@/Components/Welcome.vue';
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
 
-        <!-- Section 1 -->
         <div class="bg-white p-6 rounded-xl shadow hover:shadow-md transition">
           <div class="flex items-center mb-4">
             <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -39,8 +38,7 @@ import Welcome from '@/Components/Welcome.vue';
             Få en översikt av matpriser i olika butiker direkt i mobilen – snabbt och enkelt.
           </p>
         </div>
-
-        <!-- Section 2 -->
+        
         <div class="bg-white p-6 rounded-xl shadow hover:shadow-md transition">
           <div class="flex items-center mb-4">
             <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -53,7 +51,6 @@ import Welcome from '@/Components/Welcome.vue';
           </p>
         </div>
 
-        <!-- Section 3 -->
         <div class="bg-white p-6 rounded-xl shadow hover:shadow-md transition">
           <div class="flex items-center mb-4">
             <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -66,7 +63,6 @@ import Welcome from '@/Components/Welcome.vue';
           </p>
         </div>
 
-        <!-- Section 4 -->
         <div class="bg-white p-6 rounded-xl shadow hover:shadow-md transition">
           <div class="flex items-center mb-4">
             <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
