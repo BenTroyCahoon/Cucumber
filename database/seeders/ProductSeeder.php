@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Product;
 use App\Models\Store;
@@ -10,36 +9,21 @@ use App\Models\Price;
 
 class ProductSeeder extends Seeder
 {
-
-public function run(): void
+    public function run(): void
     {
-        // Create stores
-        $ica = Store::create([
-            'name' => 'ICA Maxi',
-            'address' => 'Stockholm',
-            'latitude' => 59.3293,
-            'longitude' => 18.0686,
-        ]);
+        $storeModels = Store::all();
 
-        $willys = Store::create([
-            'name' => 'Willys',
-            'address' => 'Stockholm',
-            'latitude' => 59.3325,
-            'longitude' => 18.0649,
-        ]);
-
-        // Create products
-        $banana = Product::create(['name' => 'Bananer', 'is_organic' => false]);
-        $bananaOrganic = Product::create(['name' => 'Bananer', 'is_organic' => true]);
-        $milk = Product::create(['name' => 'Mjölk', 'is_organic' => false]);
-
-        // Create prices
-        Price::create(['product_id' => $banana->id, 'store_id' => $ica->id, 'price' => 19.90]);
-        Price::create(['product_id' => $banana->id, 'store_id' => $willys->id, 'price' => 17.50]);
-
-        Price::create(['product_id' => $bananaOrganic->id, 'store_id' => $willys->id, 'price' => 24.90]);
-
-        Price::create(['product_id' => $milk->id, 'store_id' => $ica->id, 'price' => 11.90]);
+        // Skapa 50 produkter från factoryn
+        Product::factory(50)->create()->each(function ($product) use ($storeModels) {
+            // Ge varje produkt priser i 1–4 slumpmässiga butiker
+            $storeModels->random(rand(1, 4))->each(function ($store) use ($product) {
+                Price::create([
+                    'product_id' => $product->id,
+                    'store_id' => $store->id,
+                    'price' => round(fake()->randomFloat(2, 5, 60), 2),
+                ]);
+            });
+        });
     }
-
 }
+
