@@ -5,19 +5,20 @@
       <h1 class="text-2xl sm:text-3xl font-bold mb-4">Sök efter matvaror</h1>
 
       <div class="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
-        <input
+          <input
           v-model="form.q"
           type="text"
           placeholder="Skriv t.ex. Bananer"
-          class="flex-1 p-3 border rounded"
+          class="flex-1 p-3 border border-gray-300 rounded shadow-sm focus:ring-green-600 focus:border-green-600"
         />
 
-        <label class="inline-flex items-center gap-2">
-          <input type="checkbox" v-model="form.organic" />
+        <label class="inline-flex items-center gap-2 text-gray-700">
+          <input type="checkbox" v-model="form.organic" class="text-green-600 focus:ring-green-500" />
           Endast ekologiskt
         </label>
 
-        <select v-model="form.sort" class="p-2 border rounded">
+        <select v-model="form.sort" class="p-3 border border-gray-300 rounded shadow-sm focus:ring-green-600 focus:border-green-600">
+
           <option value="price">Sortera: Billigast</option>
           <option value="distance">Sortera: Närmast</option>
           <option value="smart">Sortera: Smartast</option>

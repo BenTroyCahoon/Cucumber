@@ -29,7 +29,7 @@ const submit = () => {
 };
 </script>
 
-<template>
+<!-- <template>
     <Head title="Log in" />
 
     <AuthenticationCard>
@@ -87,4 +87,75 @@ const submit = () => {
             </div>
         </form>
     </AuthenticationCard>
+</template> -->
+<template>
+    <Head title="Logga in" />
+
+    <AuthenticationCard class="bg-green-50 shadow-md rounded-xl">
+        <template #logo>
+            <div class="flex items-center justify-center space-x-3">
+                <img src="/images/cucumber.png" alt="Logo" class="h-10 w-10 object-contain" />
+                <span class="text-2xl font-bold text-green-700 tracking-wide font-sans">Logga in</span>
+            </div>
+        </template>
+
+        <div v-if="status" class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
+            {{ status }}
+        </div>
+
+        <form @submit.prevent="submit">
+            <div>
+                <InputLabel for="email" value="Email" />
+                <TextInput
+                    id="email"
+                    v-model="form.email"
+                    type="email"
+                    class="mt-1 block w-full"
+                    required
+                    autofocus
+                    autocomplete="username"
+                />
+                <InputError class="mt-2" :message="form.errors.email" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="password" value="Password" />
+                <TextInput
+                    id="password"
+                    v-model="form.password"
+                    type="password"
+                    class="mt-1 block w-full"
+                    required
+                    autocomplete="current-password"
+                />
+                <InputError class="mt-2" :message="form.errors.password" />
+            </div>
+
+            <div class="block mt-4">
+                <label class="flex items-center">
+                    <Checkbox v-model:checked="form.remember" name="remember" />
+                    <span class="ms-2 text-sm text-gray-700 dark:text-gray-400">Kom ihåg mig</span>
+                </label>
+            </div>
+
+            <div class="flex items-center justify-end mt-4">
+                <Link
+                    v-if="canResetPassword"
+                    :href="route('password.request')"
+                    class="underline text-sm text-green-700 hover:text-green-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                >
+                    Glömt lösenordet?
+                </Link>
+
+                <PrimaryButton
+                    class="ms-4 bg-green-600 hover:bg-green-700"
+                    :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing"
+                >
+                    Logga in
+                </PrimaryButton>
+            </div>
+        </form>
+    </AuthenticationCard>
 </template>
+

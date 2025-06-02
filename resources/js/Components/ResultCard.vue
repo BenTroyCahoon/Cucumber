@@ -224,7 +224,6 @@ const toggleWatch = () => {
   }
 }
 
-// Optional: Close modal with ESC key
 const handleKey = (e) => {
   if (e.key === 'Escape') {
     showMapModal.value = false
@@ -235,9 +234,8 @@ onMounted(() => window.addEventListener('keydown', handleKey))
 onUnmounted(() => window.removeEventListener('keydown', handleKey))
 </script>
 
-<template>
+<!-- <template>
   <div class="p-4 border rounded bg-white shadow relative">
-    <!-- Watch toggle -->
     <button @click="toggleWatch" class="absolute top-2 right-2 text-gray-400 hover:text-blue-500">
       <Eye v-if="!isSaved" class="size-5" />
       <EyeOff v-else class="size-5" />
@@ -253,7 +251,6 @@ onUnmounted(() => window.removeEventListener('keydown', handleKey))
       Avstånd: {{ result.distance }} km
     </p>
 
-    <!-- Map preview with hover effect -->
     <div
       v-if="result.store_coords"
       class="mt-2 relative cursor-pointer border rounded overflow-hidden group"
@@ -272,7 +269,6 @@ onUnmounted(() => window.removeEventListener('keydown', handleKey))
       </div>
     </div>
 
-    <!-- Modal with larger map -->
     <transition name="fade">
       <div
         v-if="showMapModal"
@@ -294,7 +290,7 @@ onUnmounted(() => window.removeEventListener('keydown', handleKey))
       </div>
     </transition>
 
-    <!-- External fallback link -->
+
     <a
       v-if="result.store_coords"
       :href="`https://www.google.com/maps/search/?api=1&query=${result.store_coords}`"
@@ -304,7 +300,75 @@ onUnmounted(() => window.removeEventListener('keydown', handleKey))
       Visa på karta (extern länk)
     </a>
   </div>
+</template> -->
+<template>
+  <div class="p-4 border rounded bg-green-50 shadow-md relative">
+
+    <button @click="toggleWatch" class="absolute top-2 right-2 text-green-400 hover:text-green-600">
+      <Eye v-if="!isSaved" class="size-5" />
+      <EyeOff v-else class="size-5" />
+    </button>
+
+    <div class="text-xl font-bold text-green-800">
+      {{ result.product }}
+    </div>
+    <div class="text-green-700">
+      {{ result.price }} kr på {{ result.store }}
+    </div>
+    <p v-if="result.distance" class="text-sm text-green-600">
+      Avstånd: {{ result.distance }} km
+    </p>
+
+    <div
+      v-if="result.store_coords"
+      class="mt-2 relative cursor-pointer border border-green-200 rounded overflow-hidden group"
+      @click="showMapModal = true"
+    >
+      <iframe
+        class="w-full h-40 pointer-events-none"
+        :src="`https://www.google.com/maps?q=${result.store_coords}&z=15&output=embed`"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+      <div
+        class="absolute inset-0 bg-green-900 bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+      >
+        <span class="text-white text-sm font-medium">Visa större karta</span>
+      </div>
+    </div>
+
+    <transition name="fade">
+      <div
+        v-if="showMapModal"
+        class="fixed inset-0 z-50 bg-black bg-opacity-70 flex items-center justify-center px-4"
+        @click.self="showMapModal = false"
+      >
+        <div class="bg-white rounded-xl shadow-xl overflow-hidden max-w-4xl w-full relative">
+          <div class="flex justify-between items-center p-4 border-b border-green-200">
+            <h2 class="text-lg font-semibold text-green-800">Plats för {{ result.store }}</h2>
+            <button @click="showMapModal = false" class="text-green-600 hover:text-green-900 text-2xl leading-none">&times;</button>
+          </div>
+          <iframe
+            class="w-full h-[600px]"
+            :src="`https://www.google.com/maps?q=${result.store_coords}&z=15&output=embed`"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </transition>
+
+    <a
+      v-if="result.store_coords"
+      :href="`https://www.google.com/maps/search/?api=1&query=${result.store_coords}`"
+      target="_blank"
+      class="text-green-600 text-sm hover:underline block mt-2"
+    >
+      Visa på karta (extern länk)
+    </a>
+  </div>
 </template>
+
 
 <style scoped>
 .fade-enter-active,
