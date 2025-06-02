@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white dark:bg-gray-800 shadow rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
+  <div class="bg-green-50 border border-green-100 rounded-2xl shadow-md hover:shadow-lg transition p-6">
     <div v-if="title || hasIcon" class="flex items-center mb-4 space-x-3">
       <slot name="icon">
         <img
@@ -8,12 +8,12 @@
           class="w-6 h-6 object-contain"
         />
       </slot>
-      <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
+      <h3 class="text-lg font-bold text-green-700 tracking-wide uppercase">
         {{ title }}
       </h3>
     </div>
 
-    <div>
+    <div class="text-gray-700 text-sm">
       <slot />
     </div>
   </div>
@@ -29,3 +29,4 @@ defineProps({
 const slots = useSlots();
 const hasIcon = computed(() => !!slots.icon);
 </script>
+
