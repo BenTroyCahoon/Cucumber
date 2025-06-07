@@ -176,35 +176,45 @@ function handleImageError() {
 </template> -->
 <template>
   <Head title="Välkommen" />
-  <div class="bg-gradient-to-br from-pink-100 via-white to-pink-200 min-h-screen flex flex-col justify-center items-center text-center px-4">
-    <h1 class="text-4xl sm:text-5xl font-extrabold text-pink-700 mb-4">
-     Från gurkkris till kontroll – få koll på matpriserna med Matpriskollen!
-    </h1>
-    <p class="text-lg text-gray-700 max-w-2xl mb-6">
+  
+  <div class="bg-gradient-to-br from-green-50 via-white to-green-100 min-h-screen flex flex-col justify-center items-center text-center px-4 py-12">
+
+    <div class="flex items-center space-x-3 mb-6">
+      <img src="/images/cucumber.png" alt="Matpriskollen logo" class="h-10 w-10 object-contain" />
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-green-700 tracking-wide">
+    Cucumber.
+      </h1>
+    </div>
+
+    <h2 class="text-xl sm:text-2xl font-semibold text-green-800 mb-4 max-w-2xl">
+      Från gurkkris till kontroll – Din oberoende prisguide till matpriser.
+    </h2>
+
+    <p class="text-base text-gray-700 max-w-2xl mb-8">
       Jämför matpriser, hitta närmaste butik, spara produkter och få en smartare vardag.
     </p>
-
-    <div class="space-x-4 mb-10">
-    <Link
+    
+    <div class="space-x-3 mb-10">
+      <Link
         :href="route('register')"
-        class="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-4 rounded shadow"
-    >
+        class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded shadow"
+      >
         Registrera dig
-    </Link>
+      </Link>
 
-    <Link
+      <Link
         :href="route('login')"
-        class="bg-white border border-pink-600 text-pink-700 font-semibold py-2 px-4 rounded hover:bg-pink-50"
-    >
+        class="bg-white border border-green-600 text-green-700 font-semibold py-2 px-4 rounded hover:bg-green-50"
+      >
         Logga in
-    </Link>
+      </Link>
 
-    <Link
+      <Link
         :href="route('search.index')"
-        class="border border-pink-600 text-pink-700 font-semibold py-2 px-4 rounded hover:bg-pink-50"
-    >
+        class="border border-green-600 text-green-700 font-semibold py-2 px-4 rounded hover:bg-green-50"
+      >
         Sök utan konto
-    </Link>
+      </Link>
     </div>
 
     <ul class="text-left text-gray-800 space-y-2 text-base max-w-md">
@@ -219,3 +229,4 @@ function handleImageError() {
 <script setup>
 import { Head, Link } from '@inertiajs/vue3'
 </script>
+
