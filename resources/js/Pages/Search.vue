@@ -1,7 +1,8 @@
 
 <template>
   <AppLayout title="Sök matvara">
-    <div class="max-w-4xl mx-auto p-4 sm:p-6">
+    <div class="max-w-4xl mx-auto p-4 sm:p-6 min-h-screen bg-green-50">
+
       <h1 class="text-2xl sm:text-3xl font-bold mb-4">Sök efter matvaror</h1>
 
       <div class="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
@@ -17,21 +18,26 @@
           Endast ekologiskt
         </label>
 
-        <select v-model="form.sort" class="p-3 border border-gray-300 rounded shadow-sm focus:ring-green-600 focus:border-green-600">
-
+        <select
+          v-model="form.sort"
+          class="p-3 pr-8 border border-gray-300 rounded shadow-sm focus:ring-green-600 focus:border-green-600"
+        >
           <option value="price">Sortera: Billigast</option>
           <option value="distance">Sortera: Närmast</option>
           <option value="smart">Sortera: Smartast</option>
         </select>
       </div>
 
-      <div v-if="results.length" class="space-y-4">
-        <ResultCard
-          v-for="result in results"
-          :key="result.product + result.store"
-          :result="result"
-        />
-      </div>
+      <div v-if="form.q && results.length" class="space-y-4">
+      <ResultCard
+        v-for="result in results"
+        :key="result.product + result.store"
+        :result="result"
+      />
+  </div>
+
+<div v-else-if="form.q" class="text-gray-500 mt-4">Inga resultat hittades.</div>
+
 
       <div v-else-if="form.q" class="text-gray-500 mt-4">Inga resultat hittades.</div>
     </div>
@@ -49,7 +55,7 @@ const props = defineProps({
   results: Array,
   query: String,
   organic: Boolean,
-  sort: String, // new prop from backend
+  sort: String,
 })
 
 const form = useForm({
@@ -57,7 +63,7 @@ const form = useForm({
   organic: props.organic || false,
   latitude: null,
   longitude: null,
-  sort: props.sort || 'price', //use the prop here!
+  sort: props.sort || 'price',
 })
 
 const search = debounce(() => {

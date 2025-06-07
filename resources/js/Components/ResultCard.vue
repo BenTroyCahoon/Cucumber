@@ -302,9 +302,8 @@ onUnmounted(() => window.removeEventListener('keydown', handleKey))
   </div>
 </template> -->
 <template>
-  <div class="p-4 border rounded bg-green-50 shadow-md relative">
-
-    <button @click="toggleWatch" class="absolute top-2 right-2 text-green-400 hover:text-green-600">
+<div class="p-4 border border-green-100 rounded-lg bg-[#fcfefd] shadow-sm relative">
+    <button @click="toggleWatch" class="absolute top-2 right-2 text-green-00 hover:text-green-600">
       <Eye v-if="!isSaved" class="size-5" />
       <EyeOff v-else class="size-5" />
     </button>
