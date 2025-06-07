@@ -40,9 +40,12 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/saved-products/{product}', [SavedProductController::class, 'destroy'])->name('saved-products.destroy');
 });
 
-Route::get('/saved-products', [SavedProductController::class, 'index'])
-    ->middleware(['auth'])
-    ->name('saved-products.index');
+    Route::middleware(['auth'])->group(function () {
+    Route::post('/saved-products', [SavedProductController::class, 'store'])->name('saved-products.store');
+    Route::delete('/saved-products/{product}', [SavedProductController::class, 'destroy'])->name('saved-products.destroy');
+    Route::get('/min-bevakning', [SavedProductController::class, 'index'])->name('saved-products.index');
+});
+
 
 
 

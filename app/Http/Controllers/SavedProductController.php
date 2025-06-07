@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+
 
 class SavedProductController extends Controller
 {
@@ -27,6 +29,19 @@ class SavedProductController extends Controller
 
         return response()->json(['status' => 'removed']);
     }
+
+
+    public function index()
+    {
+        $user = Auth::user();
+        $products = $user->savedProducts()->with('store')->get();
+
+        return Inertia::render('SavedProducts/Index', [
+            'products' => $products,
+        ]);
+    }
+
+
 }
 
 
