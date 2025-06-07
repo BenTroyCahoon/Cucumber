@@ -201,12 +201,14 @@ import { Eye, EyeOff } from 'lucide-vue-next'
 
 const props = defineProps({
   result: Object,
+  savedProductIds: Array,
 })
 
 const page = usePage()
 const user = page.props.auth?.user
 
-const isSaved = ref(false)
+const isSaved = ref(props.savedProductIds?.includes(props.result.id))
+
 const showMapModal = ref(false)
 
 const toggleWatch = () => {

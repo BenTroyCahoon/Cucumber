@@ -21,8 +21,7 @@ const removeFromWatchlist = () => {
 </script>
 
 <template>
-  <div class="p-4 border border-green-200 rounded-lg bg-green-50 shadow-sm relative">
-
+    <div class="mt-6 p-4 border border-green-200 rounded-lg bg-green-50 shadow-sm relative">
     <button
       @click="removeFromWatchlist"
       class="absolute top-2 right-2 text-green-400 hover:text-red-600"

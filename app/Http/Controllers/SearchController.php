@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class SearchController extends Controller
@@ -59,6 +61,9 @@ class SearchController extends Controller
             });
         }
 
+         $savedIds = Auth::check()
+            ? Auth::user()->savedProducts()->pluck('product_id')->toArray()
+            : [];
 
         return Inertia::render('Search', [
             'results' => $results->values(),
@@ -66,6 +71,7 @@ class SearchController extends Controller
             'organic' => $organic,
             'within10km' => $within10km,
             'sort' => $sort,
+            'savedProductIds' => $savedIds,
 
         ]);
     }

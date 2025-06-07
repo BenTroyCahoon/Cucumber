@@ -56,6 +56,7 @@ const props = defineProps({
   query: String,
   organic: Boolean,
   sort: String,
+  savedProductIds: Array,
 })
 
 const form = useForm({
